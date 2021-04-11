@@ -1,0 +1,17 @@
+- hosts: tag_Name_K8S_Master_node
+  gather_facts: no
+  
+  roles:
+  - role: K8S_Master_Node
+  
+ 
+- hosts: tag_Name_K8S_Slave_node   
+  gather_facts: no
+
+  vars_prompt:
+  - name: token
+    prompt: "Enter Token To Join To Master: "
+    private: no
+  
+  roles:
+  - role: K8S_Worker_Node
