@@ -1,0 +1,34 @@
+---
+# tasks file for ec2-instance
+
+- name: "Launching Kubernetes Master-Node"
+  ec2:
+        image: ami-0bcf5425cdc1d8a85
+        instance_type: t2.micro
+        region: ap-south-1
+        vpc_subnet_id: subnet-bf6168d7
+        key_name: NewKey
+        count: 1
+        group_id: sg-03bd803e252522aa6
+        instance_tags:
+           Name: "K8S_Master_node"
+        state: present
+        aws_access_key: "{{ access_key }}"
+        aws_secret_key: "{{ secret_key }}"
+
+
+- name: "Launching Kubernetes Slave-Node"
+  ec2:
+        image: ami-0bcf5425cdc1d8a85
+        instance_type: t2.micro
+        region: ap-south-1
+        vpc_subnet_id: subnet-bf6168d7
+        key_name: NewKey
+        count: 2
+        group_id: sg-03bd803e252522aa6
+        instance_tags:
+           Name: "K8S_Slave_node"
+        state: present
+        aws_access_key: "{{ access_key }}"
+        aws_secret_key: "{{ secret_key }}"
+
